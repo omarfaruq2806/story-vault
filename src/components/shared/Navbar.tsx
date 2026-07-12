@@ -9,6 +9,10 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { data: session, isPending } = authClient.useSession();
 
+  const handleLogout = async () => {
+    await authClient.signOut();
+  };
+
   const publicLinks: NavLink[] = [
     { name: "Home", href: "/" },
     { name: "All Stories", href: "/stories" },
@@ -16,6 +20,7 @@ export default function Navbar() {
   ];
 
   const privateLinks: NavLink[] = [
+    {name: "My Stories", href: "/my-stories"},
     { name: "Write", href: "/write" },
     { name: "Profile", href: "/profile" },
   ];
@@ -38,7 +43,7 @@ export default function Navbar() {
               <Link key={link.name} href={link.href} className="text-gray-600 hover:text-indigo-600 font-medium">{link.name}</Link>
             ))}
             {!isPending && session && (
-              <button onClick={() => authClient.signOut()} className="text-gray-600 hover:text-red-600 font-medium">Logout</button>
+              <button onClick={handleLogout} className="text-gray-600 hover:text-red-600 font-medium">Logout</button>
             )}
             {!isPending && !session && (
               <Link href="/authentication/register" className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 font-medium">Register</Link>
@@ -65,7 +70,7 @@ export default function Navbar() {
             </Link>
           ))}
           {!isPending && session ? (
-            <button onClick={() => authClient.signOut()} className="block text-red-600 font-medium">Logout</button>
+            <button onClick={handleLogout} className="block text-red-600 font-medium">Logout</button>
           ) : (
             <Link href="/authentication/register" onClick={() => setIsMobileMenuOpen(false)} className="block bg-indigo-600 text-white text-center py-2 rounded-md font-medium">Register</Link>
           )}
