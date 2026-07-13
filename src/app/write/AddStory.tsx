@@ -3,12 +3,22 @@
 import { useForm } from "react-hook-form";
 import { ItemFormData } from "@/types/addStory";
 import { addStory } from "@/services/storyServices";
+import { authClient } from "@/lib/auth-client";
 
 export default function AddStory() {
   const { register, handleSubmit } = useForm<ItemFormData>();
+  
+  const { data: session, isPending } = authClient.useSession();
+  const userId = session?.user?.id as string;
+
+  if(!userId) return <p>Not logged in . please login to add a story</p>;
+  if (isPending) {
+    return <p>Loading...</p>;
+  }
 
   const onSubmit = async (data: ItemFormData) => {
-    const response = await addStory(data);
+    const newStory = { ...data, userId };
+    const response = await addStory(newStory);
     console.log(response);
   };
 

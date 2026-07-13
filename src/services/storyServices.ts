@@ -12,6 +12,20 @@ export const addStory = async (data: ItemFormData) => {
   return response.json();
 };
 
+// get my stories
+export const getMyStories = async (userId: string) => {
+  const response = await fetch(`${BASE_URL}/api/stories?userId=${userId}`);
+  return response.json();
+};
+
+// delete a story
+export const deleteStory = async (id: string) => {
+  const response = await fetch(`${BASE_URL}/api/stories/${id}`, {
+    method: "DELETE",
+  });
+  return response.json();
+};
+
 // get all stories
 export const getStories = async () => {
   const response = await fetch(`${BASE_URL}/api/stories`);
