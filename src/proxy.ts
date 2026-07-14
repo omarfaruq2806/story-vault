@@ -1,14 +1,16 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
- 
-// This function can be marked `async` if using `await` inside
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
 export function proxy(request: NextRequest) {
-  return NextResponse.redirect(new URL('/authentication/signin/', request.url))
+  const sessionToken = request.cookies.get("better-auth.session_token");
+
+  if (!sessionToken) {
+    return NextResponse.redirect(new URL('/authentication/signin', request.url));
+  }
+
+  return NextResponse.next();
 }
- 
-// Alternatively, you can use a default export:
-// export default function proxy(request: NextRequest) { ... }
- 
+
 export const config = {
-  matcher: ['/my-stories','/write','/profile'],
-}
+  matcher: ['/my-stories/:path*', '/write/:path*', '/profile/:path*'],
+};

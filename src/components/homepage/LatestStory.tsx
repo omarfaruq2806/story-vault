@@ -1,44 +1,69 @@
 import { getStories } from "@/services/storyServices";
 import { Story } from "@/types/story";
 import Link from "next/link";
+import Image from "next/image";
 
-export const LatestStory = async() => {
+export const LatestStory = async () => {
   const stories = await getStories('', '', true);
   const latest: Story[] = stories.slice(0, 3);
-  return (
-    <section className="py-20 px-6 max-w-7xl mx-auto">
-      <div className="flex justify-between items-end mb-12">
-        <h2 className="text-4xl font-bold text-gray-900">Latest Now</h2>
-        <Link
-          href="/stories"
-          className="text-indigo-600 font-semibold hover:underline"
-        >
-          View All Stories →
-        </Link>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {latest.map((story) => (
-          <div
-            key={story._id}
-            className="group bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300"
+  return (
+    <section className="py-20 px-6 bg-[#061e29]">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex justify-between items-end mb-12">
+          <h2 className="text-4xl font-bold text-white">Latest Now</h2>
+          <Link
+            href="/stories"
+            className="text-[#22d3ee] font-semibold hover:underline"
           >
-            <div className="h-48 bg-gray-100 rounded-xl mb-6 group-hover:scale-[1.02] transition-transform duration-300"></div>
-            <h3 className="text-xl font-bold mb-2 text-gray-800">
-              {story.title}
-            </h3>
-            <p className="text-sm text-indigo-500 font-medium mb-3">
-              By {story.title}
-            </p>
-            <p className="text-gray-600 mb-6 text-sm">{story.excerpt}\\\\</p>
-            <Link
-              href={`/stories/${story._id}`}
-              className="text-indigo-600 font-semibold hover:underline"
+            View All Stories →
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {latest.map((story) => (
+            <div
+              key={story._id}
+              className="flex flex-col h-full bg-[#083344] border border-[#06b6d4]/20 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-[#06b6d4]/40 transition-all duration-300"
             >
-              Read More →
-            </Link>
-          </div>
-        ))}
+              {/* ইমেজ ও প্রায়োরিটি ট্যাগ */}
+              <div className="relative h-48 w-full overflow-hidden bg-[#061e29]/50">
+                <Image
+                  src={story.imageUrl || "/window.svg"}
+                  alt={story.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute top-3 left-3">
+                  <span className="px-3 py-1 bg-[#061e29]/80 backdrop-blur-md text-[#22d3ee] text-xs font-bold rounded-full capitalize border border-[#06b6d4]/30">
+                    {story.priority} Priority
+                  </span>
+                </div>
+              </div>
+              
+              {/* কন্টেন্ট সেকশন */}
+              <div className="p-5 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold mb-2 text-white line-clamp-1">
+                  {story.title}
+                </h3>
+                <p className="text-[#bae6fd]/70 text-sm mb-4 line-clamp-2 flex-grow">
+                  {story.shortDescription}
+                </p>
+                
+                <div className="text-sm font-medium text-[#22d3ee] mb-4">
+                  Price: ${story.price}
+                </div>
+
+                <Link
+                  href={`/stories/${story._id}`}
+                  className="w-full text-center bg-[#061e29] border border-[#06b6d4]/30 text-[#bae6fd] py-2.5 rounded-lg text-sm font-semibold hover:bg-[#06b6d4] hover:text-[#083344] transition-all"
+                >
+                  Read More →
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

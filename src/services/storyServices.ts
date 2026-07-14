@@ -13,8 +13,8 @@ export const addStory = async (data: ItemFormData) => {
 };
 
 // get my stories
-export const getMyStories = async (userId: string) => {
-  const response = await fetch(`${BASE_URL}/api/stories?userId=${userId}`);
+export const getMyStories = async (userId: string,page=1,limit=8) => {
+  const response = await fetch(`${BASE_URL}/api/stories?userId=${userId}&page=${page}&limit=${limit}`);
   return response.json();
 };
 

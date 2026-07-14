@@ -1,10 +1,11 @@
-import {Hero} from "@/components/homepage/Hero";
+
 import {LatestStory } from "@/components/homepage/LatestStory";
 import {Categories} from "@/components/homepage/Categories";
 import {Stats} from "@/components/homepage/Stats";
 import {WriteCTA} from "@/components/homepage/WriteCTA";
 import { Testimonials } from "@/components/homepage/Testimonials";
 import { Newsletter } from "@/components/homepage/Newsletter";
+import Hero from "@/components/homepage/Hero";
 
 export default function Home() {
   return (

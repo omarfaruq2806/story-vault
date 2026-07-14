@@ -11,10 +11,8 @@ export default function AddStory() {
   const { data: session, isPending } = authClient.useSession();
   const userId = session?.user?.id as string;
 
-  if(!userId) return <p>Not logged in . please login to add a story</p>;
-  if (isPending) {
-    return <p>Loading...</p>;
-  }
+  if (isPending) return <p className="text-center py-20 text-[#bae6fd]">Loading...</p>;
+  if (!userId) return <p className="text-center py-20 text-[#bae6fd]">Not logged in. Please login to add a story.</p>;
 
   const onSubmit = async (data: ItemFormData) => {
     const newStory = { ...data, userId };
@@ -22,26 +20,51 @@ export default function AddStory() {
     console.log(response);
   };
 
+  const inputStyle = "w-full p-3 rounded-lg border border-[#06b6d4]/20 bg-[#083344] text-white outline-none focus:border-[#06b6d4] transition-all placeholder:text-[#bae6fd]/50";
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-lg mx-auto">
-      <input {...register("title")} placeholder="Title" required className="w-full border p-2" />
-      <input {...register("shortDescription")} placeholder="Short Description" required className="w-full border p-2" />
-      <textarea {...register("fullDescription")} placeholder="Full Description" required className="w-full border p-2" />
-      <input type="number" {...register("price")} placeholder="Price" required className="w-full border p-2" />
-      <select {...register("priority")} className="w-full border p-2">
-        <option value="low">Low</option>
-        <option value="high">High</option>
-      </select>
-      <select {...register("category", { required: true })} className="w-full border p-2">
-    <option value="">Select Category</option>
-    <option value="fiction">Fiction</option>
-    <option value="non-fiction">Non-Fiction</option>
-    <option value="mystery">Mystery</option>
-    <option value="sci-fi">Sci-Fi</option>
-    <option value="biography">Biography</option>
-    </select>
-      <input {...register("imageUrl")} placeholder="Image URL (Optional)" className="w-full border p-2" />
-      <button type="submit" className="bg-indigo-600 text-white px-4 py-2">Submit</button>
-    </form>
+    // পুরো সেকশনের ব্যাকগ্রাউন্ড গাঢ় করা হলো
+    <div className="min-h-screen bg-[#061e29] py-12 px-6">
+      <div className="max-w-2xl mx-auto">
+        <div className="bg-[#083344] p-8 rounded-2xl border border-[#06b6d4]/20 shadow-2xl">
+          <h1 className="text-3xl font-bold text-white mb-8 text-center">Add Your Story</h1>
+          
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            <input {...register("title")} placeholder="Title" required className={inputStyle} />
+            
+            <input {...register("shortDescription")} placeholder="Short Description" required className={inputStyle} />
+            
+            <textarea {...register("fullDescription")} placeholder="Full Description" rows={4} required className={inputStyle} />
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <input type="number" {...register("price")} placeholder="Price ($)" required className={inputStyle} />
+              
+              <select {...register("priority")} className={inputStyle}>
+                <option value="low" className="bg-[#083344]">Low Priority</option>
+                <option value="high" className="bg-[#083344]">High Priority</option>
+              </select>
+            </div>
+
+            <select {...register("category", { required: true })} className={inputStyle}>
+              <option value="" className="bg-[#083344]">Select Category</option>
+              <option value="fiction" className="bg-[#083344]">Fiction</option>
+              <option value="non-fiction" className="bg-[#083344]">Non-Fiction</option>
+              <option value="mystery" className="bg-[#083344]">Mystery</option>
+              <option value="sci-fi" className="bg-[#083344]">Sci-Fi</option>
+              <option value="biography" className="bg-[#083344]">Biography</option>
+            </select>
+            
+            <input {...register("imageUrl")} placeholder="Image URL (Optional)" className={inputStyle} />
+            
+            <button 
+              type="submit" 
+              className="w-full bg-[#06b6d4] hover:bg-[#22d3ee] text-[#083344] py-3 rounded-lg font-bold transition-all"
+            >
+              Submit Story
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
