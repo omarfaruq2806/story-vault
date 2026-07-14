@@ -1,4 +1,5 @@
 
+export const dynamic = 'force-dynamic';
 import {LatestStory } from "@/components/homepage/LatestStory";
 import {Categories} from "@/components/homepage/Categories";
 import {Stats} from "@/components/homepage/Stats";
