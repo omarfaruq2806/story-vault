@@ -7,4 +7,5 @@ export type Story = {
   price: number;
   priority: string;
   imageUrl?: string;
+  category: string;
 };

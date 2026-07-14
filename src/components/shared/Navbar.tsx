@@ -16,6 +16,7 @@ export default function Navbar() {
   const publicLinks: NavLink[] = [
     { name: "Home", href: "/" },
     { name: "All Stories", href: "/stories" },
+    {name: 'About Us', href: '/about'},
     { name: "Sign In", href: "/authentication/signin" },
   ];
 
@@ -28,6 +29,8 @@ export default function Navbar() {
   const navlinks = session ? [
     { name: "Home", href: "/" },
     { name: "All Stories", href: "/stories" },
+    {name: 'About Us', href: '/about'},
+    {name:'Terms & Conditions', href: '/terms'},
     ...privateLinks
   ] : publicLinks;
 

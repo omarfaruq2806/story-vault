@@ -32,6 +32,14 @@ export default function AddStory() {
         <option value="low">Low</option>
         <option value="high">High</option>
       </select>
+      <select {...register("category", { required: true })} className="w-full border p-2">
+    <option value="">Select Category</option>
+    <option value="fiction">Fiction</option>
+    <option value="non-fiction">Non-Fiction</option>
+    <option value="mystery">Mystery</option>
+    <option value="sci-fi">Sci-Fi</option>
+    <option value="biography">Biography</option>
+    </select>
       <input {...register("imageUrl")} placeholder="Image URL (Optional)" className="w-full border p-2" />
       <button type="submit" className="bg-indigo-600 text-white px-4 py-2">Submit</button>
     </form>

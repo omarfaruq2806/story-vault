@@ -1,5 +1,5 @@
 import {Hero} from "@/components/homepage/Hero";
-import {TrendingStory } from "@/components/homepage/TrendingStory";
+import {LatestStory } from "@/components/homepage/LatestStory";
 import {Categories} from "@/components/homepage/Categories";
 import {Stats} from "@/components/homepage/Stats";
 import {WriteCTA} from "@/components/homepage/WriteCTA";
@@ -10,7 +10,7 @@ export default function Home() {
   return (
   <div>
     <Hero></Hero>
-    <TrendingStory></TrendingStory>
+    <LatestStory></LatestStory>
     <Categories></Categories>
     <Stats></Stats>
     <WriteCTA></WriteCTA>

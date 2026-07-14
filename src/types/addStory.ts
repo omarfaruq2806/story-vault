@@ -5,4 +5,5 @@ export type ItemFormData = {
   price: number;
   priority: string;
   imageUrl?: string;
+  category: string;
 };
