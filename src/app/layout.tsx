@@ -21,29 +21,6 @@ export const metadata: Metadata = {
     template: "%s | Story Vault"
   },
   description: "Story Vault is the ultimate platform for readers and writers. Discover compelling short stories, share your own creative writing, and join a community of storytellers.",
-  keywords: ["stories", "creative writing", "read stories", "write stories", "story vault", "fiction", "books"],
-  authors: [{ name: "Omar Faruq" }],
-  openGraph: {
-    title: "Story Vault | Discover & Share Your Stories",
-    description: "Join the creative community at Story Vault to read and share amazing stories.",
-    url: "https://story-vault-rho.vercel.app",
-    siteName: "Story Vault",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Story Vault",
-    description: "Discover and share stories on Story Vault.",
-    images: ["/og-image.png"],
-  },
 };
 
 export default function RootLayout({

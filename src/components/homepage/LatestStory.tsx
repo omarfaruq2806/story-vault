@@ -4,7 +4,19 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const LatestStory = async () => {
-  const stories = await getStories('', '', true);
+  let stories: Story[] = [];
+
+  try {
+    const data = await getStories('', '', true);
+    stories = Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error("LatestStory fetch error:", error);
+    stories = []; 
+  }
+
+  // ডাটা না থাকলে সেকশনটি দেখানোর দরকার নেই
+  if (stories.length === 0) return null;
+
   const latest: Story[] = stories.slice(0, 3);
 
   return (
@@ -26,7 +38,6 @@ export const LatestStory = async () => {
               key={story._id}
               className="flex flex-col h-full bg-[#083344] border border-[#06b6d4]/20 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-[#06b6d4]/40 transition-all duration-300"
             >
-              {/* ইমেজ ও প্রায়োরিটি ট্যাগ */}
               <div className="relative h-48 w-full overflow-hidden bg-[#061e29]/50">
                 <Image
                   src={story.imageUrl || "/window.svg"}
@@ -41,7 +52,6 @@ export const LatestStory = async () => {
                 </div>
               </div>
               
-              {/* কন্টেন্ট সেকশন */}
               <div className="p-5 flex flex-col flex-grow">
                 <h3 className="text-xl font-bold mb-2 text-white line-clamp-1">
                   {story.title}
