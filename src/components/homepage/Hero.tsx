@@ -37,8 +37,8 @@ const Hero = () => {
       title: "Join the Reading Revolution",
       subtitle: "Get personalized recommendations and connect with fellow book lovers.",
       bgImage: "https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=1920&auto=format&fit=crop",
-      primaryBtnText: "Sign Up",
-      primaryBtnLink: "/authentication/register",
+      primaryBtnText: "Start Writing Now",
+      primaryBtnLink: "/write",
       secondaryBtnText: "Browse Genres",
       secondaryBtnLink: "/stories"
     }

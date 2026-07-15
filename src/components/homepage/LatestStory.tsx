@@ -14,7 +14,6 @@ export const LatestStory = async () => {
     stories = []; 
   }
 
-  // ডাটা না থাকলে সেকশনটি দেখানোর দরকার নেই
   if (stories.length === 0) return null;
 
   const latest: Story[] = stories.slice(0, 3);
