@@ -5,6 +5,7 @@ import Link from "next/link";
 import { RegisterFormData } from "@/types/auth"; 
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { AnimatedToast } from "@/components/customToast/AnimatedToast";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -24,10 +25,10 @@ export default function RegisterPage() {
     });
 
     if (error) {
-        alert(error.message || "Something went wrong");
+      AnimatedToast("Failed to register.", "error");
     } else {
-        alert("Registration successful!");
-        router.push("/authentication/signin");
+      AnimatedToast("Registration successful!", "success");
+      router.push("/authentication/signin");
     }
   };
 

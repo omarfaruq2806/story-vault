@@ -4,26 +4,31 @@ import { useForm } from "react-hook-form";
 import { ItemFormData } from "@/types/addStory";
 import { addStory } from "@/services/storyServices";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/dist/client/components/navigation";
+import { AnimatedToast } from "@/components/customToast/AnimatedToast";
+import Spinner from "@/components/loading/Spinner";
 
 export default function AddStory() {
   const { register, handleSubmit } = useForm<ItemFormData>();
+  const router = useRouter();
   
-  const { data: session, isPending } = authClient.useSession();
+  const { data: session } = authClient.useSession();
   const userId = session?.user?.id as string;
-
-  if (isPending) return <p className="text-center py-20 text-[#bae6fd]">Loading...</p>;
-  if (!userId) return <p className="text-center py-20 text-[#bae6fd]">Not logged in. Please login to add a story.</p>;
-
+  
   const onSubmit = async (data: ItemFormData) => {
     const newStory = { ...data, userId };
     const response = await addStory(newStory);
-    console.log(response);
+    if (response.error) {
+      AnimatedToast("Failed to publish story.", "error");
+    } else {
+      AnimatedToast("Story published successfully!", "success");
+      router.push("/my-stories");
+    }
   };
 
   const inputStyle = "w-full p-3 rounded-lg border border-[#06b6d4]/20 bg-[#083344] text-white outline-none focus:border-[#06b6d4] transition-all placeholder:text-[#bae6fd]/50";
 
   return (
-    // পুরো সেকশনের ব্যাকগ্রাউন্ড গাঢ় করা হলো
     <div className="min-h-screen bg-[#061e29] py-12 px-6">
       <div className="max-w-2xl mx-auto">
         <div className="bg-[#083344] p-8 rounded-2xl border border-[#06b6d4]/20 shadow-2xl">

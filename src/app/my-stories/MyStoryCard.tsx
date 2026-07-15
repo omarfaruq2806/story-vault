@@ -4,14 +4,17 @@ import { deleteStory } from '@/services/storyServices';
 import { Story } from '@/types/story';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { AnimatedToast } from '@/components/customToast/AnimatedToast';
 
 const MyStoryCard = ({ story }: { story: Story }) => {
+    const router =  useRouter();
     
     const handleDelete = async () => {
         const res = await deleteStory(story._id);
         if(res.deletedCount > 0) {
-            alert('Story deleted successfully!');
-            window.location.reload(); // Refresh the page to reflect the deletion
+            AnimatedToast("Story deleted successfully!", "success")
+            router.refresh();
         }
     };
 

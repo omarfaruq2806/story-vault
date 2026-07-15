@@ -5,6 +5,7 @@ import Link from "next/link";
 import { LoginFormData } from "@/types/auth"; 
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { AnimatedToast } from "@/components/customToast/AnimatedToast";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -22,8 +23,9 @@ export default function LoginPage() {
         password: password,
     });
     if (error) {
-        alert(error.message || "Something went wrong");
+        AnimatedToast("Failed to login.", "error");
     } else {
+        AnimatedToast("Login successful!", "success");
         router.push("/");
     }
   };
