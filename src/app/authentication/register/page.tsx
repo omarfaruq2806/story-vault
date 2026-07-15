@@ -28,7 +28,7 @@ export default function RegisterPage() {
       AnimatedToast("Failed to register.", "error");
     } else {
       AnimatedToast("Registration successful!", "success");
-      router.push("/authentication/signin");
+      router.push("/");
     }
   };
 

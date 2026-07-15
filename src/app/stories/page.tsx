@@ -89,9 +89,7 @@ const Page = () => {
           <div className="text-center py-20 text-[#bae6fd]">No stories found matching your criteria.</div>
         )}
 
-        {/* Pagination */}
         <div className="flex justify-center items-center gap-6 mt-12">
-           {/* ... আগের পেজিনেশন কোডটি এখানে থাকবে ... */}
            <button disabled={page <= 1} onClick={() => handleFilterChange('page', (page - 1).toString())} className="px-6 py-2 bg-[#083344] text-white rounded-lg disabled:bg-[#061e29] disabled:text-gray-500 transition-all hover:bg-[#06b6d4]">Previous</button>
            <span className="font-bold text-[#bae6fd] text-lg">Page {page}</span>
            <button onClick={() => handleFilterChange('page', (page + 1).toString())} className="px-6 py-2 bg-[#083344] text-white rounded-lg transition-all hover:bg-[#06b6d4]">Next</button>
